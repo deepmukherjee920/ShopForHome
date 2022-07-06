@@ -1,0 +1,23 @@
+    <div fxLayoutAlign="center center"  class="main-div">
+    <mat-card fxFlex="25">
+        <mat-toolbar class="toolbar" color="primary" >Login Page</mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+            <mat-form-field class="login-button">
+                <input matInput placeholder="Username">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Password">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select>
+                    <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button type="submit">Login</button>
+            <br>
+            <button mat-raised-button type="">Register</button>
+        </form>
+        
+    </mat-card>
+</div>
