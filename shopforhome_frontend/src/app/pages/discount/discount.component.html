@@ -1,0 +1,37 @@
+<!-- <h1 align="center" class="display-4 ">Coupons</h1>
+ -->
+ <marquee direction="right"
+ behavior="alternate"
+ style="border:BLACK 2px SOLID; margin-bottom: 10px; margin-top: 10px;">
+ <h1 align="center" class="display-4 mb-5" style="font-size: 65px;">Coupons</h1>
+ </marquee>
+
+    <input type = "text" style="font-size: 15px;" name="search" [(ngModel)]="searchText" placeholder ="Click Here To Search" />
+    <input style="font-size: 15px; margin-top: 15px;" [(ngModel)]="coupon" type="text" class="form-control form-control-lg" id="coupon" name="coupon" placeholder="Enter coupon code">
+    <button (click)=addCoupon(coupon) align="right" class="btn btn-success" style="font-size: 15px; margin-top: 15px;">Add Coupon</button>
+
+<table id="table" class="table table-striped text-center" style="width:100%;">
+    <thead>
+    <tr>
+        <th scope="col" style="font-size: 15px;">Couponcode</th>
+        <th scope="col" style="font-size: 15px;">Action</th>
+
+    </tr>
+    </thead>
+    <!--Search by
+    <select ng-model="columns" ng-options="e for e in headers">
+        <option value=""></option>
+    </select>
+    Search <input type = "text" ng-model ="Search[columns]" placeholder ="Enter Some Text To Search" />-->
+    <tbody>
+    <tr *ngFor="let coupon of page?.content | filter:searchText">
+
+        <td class="align-middle" style="font-size: 15px;">{{coupon.id}}</td>
+        <td class="align-middle">
+            <button (click)=deleteCoupon(coupon.id)  class="btn btn-danger" style="font-size: 15px;">Delete</button>
+           <!-- <a  [ngClass]="{'isDisabled':'(productInfo.productStock >10)? true:false'}"style="display: block" class="isDisabled"  routerLink="/email">Email</a>-->
+        </td>
+
+    </tbody>
+</table>
+<app-pagination [currentPage]="page" style="font-size: 15px;"></app-pagination>

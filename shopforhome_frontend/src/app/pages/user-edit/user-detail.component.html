@@ -1,0 +1,61 @@
+<!-- <h1 align="center" class="display-4 mb-5">Edit Profiles</h1> -->
+<marquee direction="right"
+behavior="alternate"
+style="border:BLACK 2px SOLID; margin-bottom: 10px; margin-top: 10px;">
+<h1 align="center" class="display-4 mb-5" style="font-size: 65px;">Edit Profiles</h1>
+</marquee>
+<div style="width:40%; margin: 25px auto" >
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label><b style="font-size: 15px;">Email address</b></label>
+        <input readonly [value]=user?.email type="email" class="form-control form-control-lg " disabled id="email"
+               name="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label><b style="font-size: 15px;">Name</b></label>
+      <input [(ngModel)]="user.name" type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Your name" required #name="ngModel" autofocus>
+      <div  *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors.required" style="font-size: 15px;">
+          Name is required.
+        </div>
+        <div *ngIf="name.errors.minlength" style="font-size: 15px;">
+          Name must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><b style="font-size: 15px;">Password</b></label>
+      <input  [(ngModel)]="user.password" type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password" minlength="3" required #password="ngModel">
+      <div  *ngIf="password.invalid && (password.dirty ||password.touched)">
+        <div *ngIf="password.errors.required" style="font-size: 15px;">
+          Password is required.
+        </div>
+        <div *ngIf="password.errors.minlength" style="font-size: 15px;">
+          Password must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><b style="font-size: 15px;">Phone</b></label>
+      <input [(ngModel)]="user.phone" type="text" class="form-control form-control-lg" id="phone" name="phone" placeholder="Phone" required #phone="ngModel" >
+      <div  *ngIf="phone.invalid && (phone.dirty ||phone.touched)">
+        <div *ngIf="phone.errors.required" style="font-size: 15px;">
+          Phone is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><b style="font-size: 15px;">Address</b></label>
+      <input [(ngModel)]="user.address" type="text" class="form-control form-control-lg" id="address" name="address" placeholder="Address" required #address="ngModel">
+      <div  *ngIf="address.invalid && (address.dirty ||address.touched)">
+        <div *ngIf="address.errors.required" style="font-size: 15px;">
+          Address is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-lg btn-success btn-block" [disabled]="!form.form.valid" style="font-size: 15px;">Update</button>
+    </div>
+  </form>
+</div>
+

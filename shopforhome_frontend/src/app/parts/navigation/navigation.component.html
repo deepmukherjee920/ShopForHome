@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-success bg-success">
+    <a class="navbar-brand" [routerLink]="root" style="color: black;">
+        <!-- <img src="/assets/brand.png" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+        <h1 style="font-size: 40px; margin-bottom: 15px; margin-right: 5px;">SHOP FOR HOME</h1>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <div class="navbar-nav" *ngIf="!currentUser || currentUser.role == Role.Customer" style="margin-right: 10px;">
+
+            <a class="nav-item nav-link "
+               routerLink="/category/0" style="color: black; font-size: 15px;">
+               Books & Designs
+            </a>
+            <a class="nav-item nav-link"
+               routerLink="/category/1" style="color: black; font-size: 15px;">
+               Decorations
+            </a>
+            <a class="nav-item nav-link "
+               routerLink="/category/2" style="color: black; font-size: 15px;">
+               Dresses
+            </a>
+            <a class="nav-item nav-link"
+               routerLink="/category/3" style="color: black; font-size: 15px;">
+               accessiories
+            </a>
+
+
+
+        </div>
+
+
+
+        <div class="navbar-nav ml-auto">
+            <a *ngIf="!currentUser || currentUser.role == Role.Customer"
+                    class="nav-item nav-link " routerLink="/cart" style="color: black; font-size: 15px;">
+                <i class="fas fa-shopping-cart" style="color: black; font-size: 15px;"></i>
+                <!-- Cart -->
+            </a>
+
+            <div class="navbar-nav" *ngIf="currentUser && currentUser.role == Role.Manager">
+
+                <a class="nav-item nav-link"  routerLink="/discount" style="color: black; font-size: 15px;">Coupons</a>
+                <a class="nav-item nav-link" (click)=getUsers() routerLink="/admin/user" style="color: black; font-size: 15px;">Users</a>
+                <a class="nav-item nav-link" routerLink="/seller/product" style="color: black; font-size: 15px;">products</a>
+            </div>
+
+            <div class="navbar-nav" *ngIf="currentUser && currentUser.role == Role.Customer">
+                <a class="nav-item nav-link"  routerLink="/wishlist" style="color: black; font-size: 15px;">
+
+                  <i class="fas fa-heart" style="color: black; font-size: 15px;"></i>
+                </a>
+            </div>
+
+            <ng-container *ngIf="currentUser; else noUser">
+                <a class="nav-item nav-link " routerLink="/order" style="color: black; font-size: 15px;">
+                    <i class="fas fa-list-ul" style="color: black;"></i>
+                </a>
+                <a class="nav-item nav-link " routerLink="/profile" style="color: black; font-size: 15px;">
+                    {{name}}
+                </a>
+                <a class="nav-item nav-link " (click)="logout()" routerLink="/login" [queryParams]="{logout: true}" style="color: black; font-size: 15px;">
+                    Logout
+                </a>
+            </ng-container>
+            <ng-template #noUser>
+                <a class="nav-item nav-link " routerLink="/login" style="color: black; font-size: 15px;">
+                    Login
+                </a>
+                <a class="nav-item nav-link " routerLink="/register" style="color: black; font-size: 15px;">
+                    Register
+                </a>
+            </ng-template>
+
+            </div>
+    </div>
+</nav>

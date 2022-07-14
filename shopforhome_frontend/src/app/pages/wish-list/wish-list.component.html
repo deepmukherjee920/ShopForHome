@@ -1,0 +1,50 @@
+<!-- <h1 align="center" class="display-4 mb-5">My WishList</h1> -->
+<marquee direction="right"
+behavior="alternate"
+style="border:BLACK 2px SOLID; margin-bottom: 10px; margin-top: 10px;">
+<h1 align="center" class="display-4 mb-5" style="font-size: 65px;">My WishList</h1>
+</marquee>
+<!--Cart Detail Table-->
+<table class="table table-striped text-center">
+    <thead>
+    <tr>
+        <th scope="col" style="font-size: 15px;">Photo</th>
+        <th scope="col" style="font-size: 15px;">ID</th>
+        <th scope="col" style="font-size: 15px;">Name</th>
+        <th scope="col" style="font-size: 15px;">Price</th>
+
+        <th scope="col" style="font-size: 15px;">Action</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let productInOrder of page?.content">
+
+        <th class="align-middle" scope="row">
+            <a style="font-size: 15px;" routerLink="/product/{{productInOrder.product.productId}}"><img height="150px"
+                                                                       src="{{productInOrder.product.productIcon}}"
+                                                                       alt="{{productInOrder.product.productName}}"></a>
+        </th>
+       <td style="font-size: 15px;" class="align-middle">
+        {{productInOrder.product.productId}}
+       </td>
+        <td style="font-size: 15px;" class="align-middle"><a
+                routerLink="/product/{{productInOrder.product.productId}}" style="font-size: 15px;">{{productInOrder.product.productName}}</a></td>
+        <td class="align-middle" style="font-size: 15px;">{{productInOrder.product.productPrice | currency}}</td>
+
+
+        <td class="align-middle" >
+            <a (click)="handleRemoveFromWishList(productInOrder.product.productId)" routerLink="/wishlist" style="font-size: 15px;">Remove</a>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+<ng-template #empty>
+    <h4 class="text-muted text-center" style="font-size: 35px;">WHY WISHLIST IS EMPTY!!😊😊👌</h4>
+</ng-template>
+
+

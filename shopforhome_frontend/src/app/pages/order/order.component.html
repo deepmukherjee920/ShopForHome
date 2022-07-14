@@ -1,0 +1,50 @@
+<!-- <h1 align="center" class="display-4 mb-5">Orders</h1> -->
+<marquee direction="right"
+behavior="alternate"
+style="border:BLACK 2px SOLID; margin-bottom: 10px; margin-top: 10px;">
+<h1 align="center" class="display-4 mb-5" style="font-size: 65px;">Orders</h1>
+</marquee>
+<table class="table table-striped text-center">
+    <thead>
+    <tr>
+        <th scope="col" style="font-size: 15px;">Order #</th>
+        <th scope="col" style="font-size: 15px;" >Customer Name</th>
+        <th scope="col" style="font-size: 15px;">Customer Email</th>
+        <th scope="col" style="font-size: 15px;">Customer phone</th>
+        <th scope="col" style="font-size: 15px;">Shipping Address</th>
+        <th scope="col" style="font-size: 15px;">Total</th>
+        <th scope="col" style="font-size: 15px;">Order Data</th>
+        <th scope="col" style="font-size: 15px;">Status</th>
+        <th scope="col" style="font-size: 15px;">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let order of page?.content">
+        <th class="align-middle" scope="row" style="font-size: 15px;">
+            {{order.orderId}}
+        </th>
+        <td class="align-middle" style="font-size: 15px;">{{order.buyerName}}</td>
+        <td class="align-middle" style="font-size: 15px;">{{order.buyerEmail}}</td>
+        <td class="align-middle" style="font-size: 15px;">{{order.buyerPhone}}</td>
+        <td class="align-middle" style="font-size: 15px;">{{order.buyerAddress}}</td>
+        <td class="align-middle" style="font-size: 15px;">{{order.orderAmount | currency}}</td>
+        <td class="align-middle" style="font-size: 15px;">{{order.createTime | date}}</td>
+        <td class="align-middle" style="font-size: 15px;">{{OrderStatus[order.orderStatus]}}</td>
+        <td class="align-middle" style="font-size: 15px;">
+            <a *ngIf="!(currentUser.role == Role.Customer && currentUser.name == order.buyerEmail)"
+               style="display:
+            block" href="" routerLink="/order/{{order.orderId}}" style="font-size: 15px; margin-right: 5px;" class="btn btn-primary btn-success">
+                Show</a>
+            <a class="btn btn-primary btn-success" *ngIf="order.orderStatus == 0" style="display: block" (click)="cancel(order)" routerLink="./" style="font-size: 15px;">Cancel</a>
+            <a class="btn btn-primary btn-success" *ngIf="currentUser.role != Role.Customer && order.orderStatus == 0"
+               style="display: block"
+               (click)="finish(order)"
+               routerLink="./" style="font-size: 15px; margin-top: 5px;">
+                Finish</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<app-pagination [currentPage]="page" style="font-size: 15px;"></app-pagination>

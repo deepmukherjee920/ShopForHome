@@ -1,0 +1,52 @@
+<!-- <h1 align="center" class="display-4 mb-5">Sign In</h1> -->
+<marquee direction="right"
+behavior="alternate"
+style="border:BLACK 2px SOLID; margin-bottom: 10px; margin-top: 10px;">
+<h1 align="center" class="display-4 mb-5" style="font-size: 65px;">Sign In</h1>
+</marquee>
+<div style="width:40%; margin: 25px auto">
+
+    <div class="alert alert-danger" *ngIf="isInvalid" style="font-size: 15px;">
+        Invalid username and password.
+    </div>
+    <div class="alert alert-info" *ngIf="isLogout" style="font-size: 15px;">
+        You have been logged out.
+    </div>
+
+
+    <form #form='ngForm' (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label style="font-size: 15px;">Email address</label>
+            <input type="text" class="form-control form-control-lg" id="email" name="email" placeholder="Enter email"
+                   required autofocus [(ngModel)]="model.username" #email="ngModel" autocomplete="email" >
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger" style="font-size: 15px;">
+                Email is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="font-size: 15px;">Password</label>
+            <input type="password" class="form-control form-control-lg" id="password" name="password"  autocomplete="password"
+                   placeholder="Password" required [(ngModel)]="model.password" #password='ngModel'>
+            <div [hidden]="password.valid || password.pristine" class="alert alert-danger" style="font-size: 15px;">
+                Email is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <input style="font-size: 15px;" type="checkbox" id="remember_me" name="remember-me" [(ngModel)]="model.remembered">
+                <label for="remember_me" class="inline" style="font-size: 15px;">Remember me</label>
+                <a class="float-right" routerLink="/register" style="font-size: 15px;">Register</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button [disabled]="!form.form.valid" type="submit" class="btn btn-lg btn-primary btn-block">Sign In</button>
+        </div>
+    </form>
+
+
+
+
+</div>
